@@ -1,12 +1,13 @@
 import "./App.css";
-import Navbar from "./Components/Navbar";
-import Blogs from "./Pages/Blogs";
+import BlogPage from "./Pages/BLogPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import NotFound from "./Components/NotFound/NotFound";
 import PostDetails from "./Pages/PostDetails";
 import AddBlog from "./Pages/AddBlog";
 import EditBlog from "./Pages/EditBlog";
+import NewPage from "./Pages/NewPage";
+import { PostsContextProvioder } from "./store/PostsContext";
 function App() {
   let router = createBrowserRouter([
     {
@@ -15,7 +16,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Blogs />,
+          element: <BlogPage />,
         },
         {
           path: ":id",
@@ -26,6 +27,7 @@ function App() {
           element: <AddBlog />,
         },
         { path: ":id/edit", element: <EditBlog /> },
+        { path: "new", element: <NewPage /> },
         {
           path: "*",
           element: <NotFound />,
@@ -33,7 +35,12 @@ function App() {
       ],
     },
   ]);
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <PostsContextProvioder>
+      {" "}
+      <RouterProvider router={router}></RouterProvider>;
+    </PostsContextProvioder>
+  );
 }
 
 export default App;

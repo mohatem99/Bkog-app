@@ -1,11 +1,14 @@
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 function Layout() {
   return (
-    <div>
+    <div className=" ">
       <Navbar />
-      <div className="container mx-auto">
+      <div
+        className="max-w-7xl  mx-auto "
+        style={{ minHeight: "calc(100vh - 64px)" }}
+      >
         <Outlet />
       </div>
       <Footer />

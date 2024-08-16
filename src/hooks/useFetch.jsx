@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../utils/axios";
 
-function useFetch(params = "", query = "") {
+function useFetch(params = "", query = "", tag = "") {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,6 +22,22 @@ function useFetch(params = "", query = "") {
   useEffect(() => {
     fetchData();
   }, [query]);
+
+  const fetchtagPostsUpdate = async () => {
+    try {
+      const res = await api.get(`tag/${tag}`);
+      console.log("hiiiii");
+
+      setData(res.data.posts);
+    } catch (e) {
+      console.log(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchtagPostsUpdate();
+  }, [tag]);
   return [data, loading];
 }
 
